@@ -1,0 +1,71 @@
+def isWordGuessed(secretWord, lettersGuessed):
+    
+    wordguess = 0
+    for letter in secretWord:
+        if letter in lettersGuessed:
+            wordguess += 1
+        else:
+            return False
+    return True
+
+def getGuessedWord(secretWord, lettersGuessed):
+    
+    guessed = ""
+        
+    for letter in secretWord:
+        
+        if letter in lettersGuessed:
+            guessed = guessed + letter
+        else:
+            guessed = guessed + "_ "
+
+    return guessed
+    
+def getAvailableLetters(lettersGuessed):
+    
+    import string
+    fullstring = string.ascii_lowercase
+    available = ""
+       
+    for letter in fullstring:
+        if letter not in lettersGuessed:
+            available = available + letter
+    
+    return available
+
+def Hangaroo(secretWord):
+    
+    print ("Welcome to the Hangaroo game.")
+    print ("The secret word you will be guessing is " +  str(len(secretWord))  + " letters long.")
+    print ('Start guessing')
+    lettersGuessed = []
+    mistakesMade = 0
+    guessesLeft = 3
+    
+    while mistakesMade < 3:
+        if isWordGuessed(secretWord, lettersGuessed):
+            return print ("Wow! You got the secret word!")
+        
+        print (str( guessesLeft )  + " guesses left!")
+        print ("The available letters are: " + getAvailableLetters(lettersGuessed))
+            
+        guess = input("Guess a letter: ")
+        guess = str(guess)
+        guess = guess.lower()
+        
+        if guess not in lettersGuessed:
+            lettersGuessed.append(guess)
+            
+            if guess in secretWord:
+                print ("Correct guess!")
+                print ("secret word: " + getGuessedWord(secretWord, lettersGuessed))
+            else:
+                print ("Wrong guess. ")
+                print ("secret word: " + getGuessedWord(secretWord, lettersGuessed))
+                mistakesMade += 1
+                guessesLeft -= 1
+        else:
+            print ("The letter '" + guess + "' is already used.")
+            print ("secret word: " + getGuessedWord(secretWord, lettersGuessed))
+            
+    return print ("There is no more guessess left. The secret word is " + str(secretWord))
