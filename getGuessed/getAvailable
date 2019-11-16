@@ -1,0 +1,11 @@
+def getAvailableLetters(lettersGuessed):
+    
+    import string
+    fullstring = string.ascii_lowercase
+    available = ""
+       
+    for letter in fullstring:
+        if letter not in lettersGuessed:
+            available = available + letter
+    
+    return available
