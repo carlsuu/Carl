@@ -1,0 +1,12 @@
+def getGuessedWord(secretWord, lettersGuessed):
+    
+    guessed = ""
+        
+    for letter in secretWord:
+        
+        if letter in lettersGuessed:
+            guessed = guessed + letter
+        else:
+            guessed = guessed + "_ "
+
+    return guessed
